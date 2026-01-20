@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <button class="dropdown-trigger" (click)="toggle()">
+        ⋮
+    </button>
+    <div class="dropdown-menu" *ngIf="isOpen">
+        <button (click)="onEdit()">Editar</button>
+        <button (click)="onDelete()">Eliminar</button>
+    </div>
+</div>

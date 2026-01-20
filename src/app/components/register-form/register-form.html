@@ -1,0 +1,81 @@
+<div class="form-container">
+    <div class="form-card">
+        <h2 class="form-title">{{isEditMode ? 'Editar Producto' : 'Formulario de Registro'}}</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <!-- ID -->
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" id="id" formControlName="id" (blur)="validateIdNotExists()"
+                        [class.input-error]="isInvalid('id')" [disabled]="isEditMode" />
+                    <span class="error-message" *ngIf="isInvalid('id')">
+                        {{ getError('id') }}
+                    </span>
+                </div>
+
+                <!-- Nombre -->
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" formControlName="name" [class.input-error]="isInvalid('name')" />
+                    <span class="error-message" *ngIf="isInvalid('name')">
+                        {{ getError('name') }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Descripción -->
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <input type="text" id="description" formControlName="description"
+                        [class.input-error]="isInvalid('description')" />
+                    <span class="error-message" *ngIf="isInvalid('description')">
+                        {{ getError('description') }}
+                    </span>
+                </div>
+
+                <!-- Logo -->
+                <div class="form-group">
+                    <label for="logo">Logo</label>
+                    <input type="text" id="logo" formControlName="logo" [class.input-error]="isInvalid('logo')" />
+                    <span class="error-message" *ngIf="isInvalid('logo')">
+                        {{ getError('logo') }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Fecha Liberación -->
+                <div class="form-group">
+                    <label for="date_release">Fecha Liberación</label>
+                    <input type="date" id="date_release" formControlName="date_release"
+                        [class.input-error]="isInvalid('date_release')" />
+                    <span class="error-message" *ngIf="isInvalid('date_release')">
+                        {{ getError('date_release') }}
+                    </span>
+                </div>
+
+                <!-- Fecha Revisión (auto-calculada, disabled) -->
+                <div class="form-group">
+                    <label for="date_revision">Fecha Revisión</label>
+                    <input type="date" id="date_revision" formControlName="date_revision"
+                        [class.input-error]="isInvalid('date_revision')" />
+                    <span class="error-message" *ngIf="isInvalid('date_revision')">
+                        {{ getError('date_revision') }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" (click)="onReset()">
+                    Reiniciar
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'Enviando...' : 'Enviar' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

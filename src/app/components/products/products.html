@@ -1,0 +1,72 @@
+<div class="tbl-container">
+
+    <div class="tbl-header">
+        <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()" />
+        <button class="btn-add" (click)="onAddProduct()">Agregar</button>
+    </div>
+    <table class="tbl-product">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Nombre del producto</th>
+                <th>
+                    <div class="th-content">
+                        Descripción
+                        <span class="info-icon" title="Información del producto">
+                            <svg width="24" height="24">
+                                <use href="information.svg"></use>
+                            </svg>
+                        </span>
+                    </div>
+                </th>
+                <th>Fecha de liberación
+                    <div class="th-content">
+                        <span class="info-icon" title="Información del producto">
+                            <svg width="24" height="24">
+                                <use href="information.svg"></use>
+                            </svg>
+                        </span>
+                    </div>
+
+                </th>
+                <th>Fecha de restructuración
+                    <div class="th-content">
+                        <span class="info-icon" title="Información del producto">
+                            <svg width="24" height="24">
+                                <use href="information.svg"></use>
+                            </svg>
+                        </span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of filteredProducts">
+                <td>
+                    <img [src]="product.logo" [alt]="product.name" class="product-logo">
+                    <!-- <img [src]="product.logo" [alt]="product.name" class="product-logo"
+                        (error)="$any($event.target).src='assets/default-logo.png'"> -->
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release }}</td>
+                <td>{{ product.date_revision }}</td>
+                <td class="action-cell">
+                    <app-dropdown [product]="product" (edit)="onEditProduct($event)"
+                        (delete)="onDeleteProduct($event)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Footer tbl -->
+    <div class="tbl-footer">
+        <span class="results-count">{{ resultCount }} Resultados</span>
+        <select [(ngModel)]="pageSize" class="page-size-select" (ngModelChange)="onPageSizeChange()">
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+        </select>
+    </div>
+</div>
